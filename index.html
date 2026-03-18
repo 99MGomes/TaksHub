@@ -20,26 +20,6 @@
         <a href="https://chatgpt.com" target="_blank" class="link-btn">ChatGPT</a>
         <a href="https://www.canva.com/projects" target="_blank" class="link-btn">Canva</a>
       </div>
-
-      <div class="game-container">
-        <div class="game-menu">
-            <button class="mode-btn active" onclick="setMode('pvp', this)">PvP</button>
-            <button class="mode-btn" onclick="setMode('pvia', this)">PvIA</button>
-        </div>
-
-        <div class="tic-tac-toe" id="board">
-          <div class="cell" data-index="0"></div>
-          <div class="cell" data-index="1"></div>
-          <div class="cell" data-index="2"></div>
-          <div class="cell" data-index="3"></div>
-          <div class="cell" data-index="4"></div>
-          <div class="cell" data-index="5"></div>
-          <div class="cell" data-index="6"></div>
-          <div class="cell" data-index="7"></div>
-          <div class="cell" data-index="8"></div>
-        </div>
-        <button class="reset-btn" onclick="resetGame()">Reiniciar</button>
-      </div>
     </aside>
 
     <main class="task-section">
@@ -48,6 +28,7 @@
 
         <div class="add">
           <input id="taskInput" type="text" placeholder="O que preciso fazer hoje?">
+          <input id="taskDate" type="date" title="Data de entrega">
           <button onclick="addTask()">Adicionar</button>
         </div>
 
@@ -65,6 +46,15 @@
       </div>
     </main>
 
+  </div>
+
+  <div id="descModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h2>Descrição da Atividade</h2>
+      <textarea id="taskDesc" rows="6" placeholder="Escreva os detalhes da sua tarefa aqui..."></textarea>
+      <button class="save-modal-btn" onclick="saveDescription()">Salvar Descrição</button>
+    </div>
   </div>
 
   <script src="script.js"></script>

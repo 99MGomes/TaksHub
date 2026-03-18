@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="img/favicon-32x32.png">
+    <title>Planejamento Pessoal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app-layout">
+    
+    <aside class="sidebar">
+      <h1 class="sidebar-title">Links</h1>
+      
+      <div class="links-group">
+        <a href="https://drive.google.com" target="_blank" class="link-btn">Drive</a>
+        <a href="https://trello.com" target="_blank" class="link-btn">Trello</a>
+        <a href="https://chatgpt.com" target="_blank" class="link-btn">ChatGPT</a>
+        <a href="https://www.canva.com/projects" target="_blank" class="link-btn">Canva</a>
+      </div>
+
+      <div class="game-container">
+        <div class="game-menu">
+            <button class="mode-btn active" onclick="setMode('pvp', this)">PvP</button>
+            <button class="mode-btn" onclick="setMode('pvia', this)">PvIA</button>
+        </div>
+
+        <div class="tic-tac-toe" id="board">
+          <div class="cell" data-index="0"></div>
+          <div class="cell" data-index="1"></div>
+          <div class="cell" data-index="2"></div>
+          <div class="cell" data-index="3"></div>
+          <div class="cell" data-index="4"></div>
+          <div class="cell" data-index="5"></div>
+          <div class="cell" data-index="6"></div>
+          <div class="cell" data-index="7"></div>
+          <div class="cell" data-index="8"></div>
+        </div>
+        <button class="reset-btn" onclick="resetGame()">Reiniciar</button>
+      </div>
+    </aside>
+
+    <main class="task-section">
+      <div class="container">
+        <h1 class="task-title">Lista de Tarefas</h1>
+
+        <div class="add">
+          <input id="taskInput" type="text" placeholder="O que preciso fazer hoje?">
+          <button onclick="addTask()">Adicionar</button>
+        </div>
+
+        <div class="lists-container">
+          <div class="list-column">
+            <h2>A fazer</h2>
+            <ul id="todo"></ul>
+          </div>
+
+          <div class="list-column">
+            <h2>Concluídos</h2>
+            <ul id="done"></ul>
+          </div>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

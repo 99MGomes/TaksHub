@@ -116,7 +116,7 @@ body {
   transform: scale(1.05);
 }
 
-input[type="text"], input[type="date"] {
+input[type="text"], input[type="date"], input[type="password"] {
   padding: 15px;
   border-radius: 10px;
   border: none;
@@ -217,6 +217,57 @@ input[type="checkbox"] {
   height: 18px; /* Aumenta a altura */
   cursor: pointer; /* Fica com a mãozinha ao passar o mouse */
   accent-color: #0b0161; /* Deixa a cor azul quando você marca a tarefa */
+}
+
+/* --- TELA DE LOGIN --- */
+.login-container {
+  background-color: rgba(11, 1, 97, 0.4);
+  backdrop-filter: blur(12px);
+  padding: 40px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 350px;
+  text-align: center;
+  align-self: center;
+}
+
+.login-container h2 {
+  color: #fff;
+  margin-bottom: 10px;
+  border: none;
+  font-size: 2rem;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 15px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.login-container button {
+  padding: 15px;
+  background-color: #0b0161;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+.login-container button:hover {
+  background-color: #1a0b8a;
+  transform: scale(1.02);
 }
 
 /* --- MODAL (POPUP) --- */

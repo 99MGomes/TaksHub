@@ -9,7 +9,14 @@
 </head>
 <body>
 
-  <div class="app-layout">
+  <div id="login-screen" class="login-container">
+    <h2>Bem-vindo</h2>
+    <input type="text" id="username" placeholder="Seu E-mail">
+    <input type="password" id="password" placeholder="Sua Senha (mín. 6 caracteres)">
+    <button onclick="fazerLogin()">Entrar / Cadastrar</button>
+  </div>
+
+  <div id="app-screen" class="app-layout" style="display: none;">
     
     <aside class="sidebar">
       <h1 class="sidebar-title">Links</h1>
@@ -20,11 +27,13 @@
         <a href="https://chatgpt.com" target="_blank" class="link-btn">ChatGPT</a>
         <a href="https://www.canva.com/projects" target="_blank" class="link-btn">Canva</a>
       </div>
+
+      <button class="link-btn" style="margin-top: 20px; background-color: #d32f2f;" onclick="sair()">Sair</button>
     </aside>
 
     <main class="task-section">
       <div class="container">
-        <h1 class="task-title">Lista de Tarefas</h1>
+        <h1 class="task-title" id="saudacao">Lista de Tarefas</h1>
 
         <div class="add">
           <input id="taskInput" type="text" placeholder="O que preciso fazer hoje?">
@@ -45,7 +54,6 @@
         </div>
       </div>
     </main>
-
   </div>
 
   <div id="descModal" class="modal">
@@ -56,12 +64,8 @@
       <button class="save-modal-btn" onclick="saveDescription()">Salvar Descrição</button>
     </div>
   </div>
-    
-<div id="descModal" class="modal">
-    </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  
   <script src="script.js"></script>
 </body>
 </html>

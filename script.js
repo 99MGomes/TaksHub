@@ -1,19 +1,18 @@
-// ==========================================
-// CONFIGURAÇÃO DO SUPABASE
-// ==========================================
+
+//-------------------------- SUPABASE ------------------------------------
+
 const supabaseUrl = 'https://oobqohznlecgyahysyoq.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9vYnFvaHpubGVjZ3lhaHlzeW9xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyNzQ3MzEsImV4cCI6MjA4OTg1MDczMX0.8N0XvDCRnfV-HKOo60vJjlMvr2Tczk-uIer32dGY4Z4';
 
-// NOME ALTERADO AQUI PARA EVITAR CONFLITO:
 const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 let usuarioAtual = null;
 let tasks = [];
 let currentEditingId = null;
 
-// ==========================================
-// 1. LOGIN E SESSÃO
-// ==========================================
+
+// ----------------------- LOGIN E SESSÃO ----------------------------------
+
 window.onload = async function() {
   const { data: { session } } = await supabaseClient.auth.getSession();
   if (session) {
@@ -59,13 +58,14 @@ function mostrarAplicativo() {
   buscarTarefas();
 }
 
-// ==========================================
-// 2. TAREFAS
-// ==========================================
+
+//------------------------------ TAREFAS -------------------------------------
+
 async function buscarTarefas() {
   const { data, error } = await supabaseClient
     .from('tarefas')
     .select('*')
+    .eq('user_id', usuarioAtual.id) 
     .order('id', { ascending: true });
 
   if (!error) {
@@ -136,9 +136,8 @@ async function deleteTask(id) {
   }
 }
 
-// ==========================================
-// 3. MODAL E RENDER
-// ==========================================
+// ------------------------  MODAL E RENDER -----------------------------------------------
+
 function openModal(id) {
   currentEditingId = id;
   const task = tasks.find(t => t.id === id);

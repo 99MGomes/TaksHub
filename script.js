@@ -4,7 +4,9 @@
 const supabaseUrl = 'https://oobqohznlecgyahysyoq.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9vYnFvaHpubGVjZ3lhaHlzeW9xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyNzQ3MzEsImV4cCI6MjA4OTg1MDczMX0.8N0XvDCRnfV-HKOo60vJjlMvr2Tczk-uIer32dGY4Z4';
 
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+// NOME ALTERADO AQUI PARA EVITAR CONFLITO:
+const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
 let usuarioAtual = null;
 let tasks = [];
 let currentEditingId = null;
@@ -13,7 +15,7 @@ let currentEditingId = null;
 // 1. LOGIN E SESSÃO
 // ==========================================
 window.onload = async function() {
-  const { data: { session } } = await supabase.auth.getSession();
+  const { data: { session } } = await supabaseClient.auth.getSession();
   if (session) {
     usuarioAtual = session.user;
     mostrarAplicativo();
@@ -29,10 +31,10 @@ async function fazerLogin() {
     return;
   }
 
-  let { data, error } = await supabase.auth.signInWithPassword({ email, password: pass });
+  let { data, error } = await supabaseClient.auth.signInWithPassword({ email, password: pass });
 
   if (error) {
-    const { data: signUpData, error: signUpError } = await supabase.auth.signUp({ email, password: pass });
+    const { data: signUpData, error: signUpError } = await supabaseClient.auth.signUp({ email, password: pass });
     if (signUpError) {
       alert("Erro: " + signUpError.message);
       return;
@@ -46,7 +48,7 @@ async function fazerLogin() {
 }
 
 async function sair() {
-  await supabase.auth.signOut();
+  await supabaseClient.auth.signOut();
   location.reload();
 }
 
@@ -61,7 +63,7 @@ function mostrarAplicativo() {
 // 2. TAREFAS
 // ==========================================
 async function buscarTarefas() {
-  const { data, error } = await supabase
+  const { data, error } = await supabaseClient
     .from('tarefas')
     .select('*')
     .order('id', { ascending: true });
@@ -87,7 +89,7 @@ async function addTask() {
     concluida: false
   };
 
-  const { data, error } = await supabase.from('tarefas').insert([novaTarefa]).select();
+  const { data, error } = await supabaseClient.from('tarefas').insert([novaTarefa]).select();
 
   if (!error && data) {
     tasks.push(data[0]);
@@ -102,7 +104,7 @@ async function toggleTask(id) {
   if (!task) return;
 
   const novoStatus = !task.concluida;
-  const { error } = await supabase.from('tarefas').update({ concluida: novoStatus }).eq('id', id);
+  const { error } = await supabaseClient.from('tarefas').update({ concluida: novoStatus }).eq('id', id);
 
   if (!error) {
     task.concluida = novoStatus;
@@ -116,7 +118,7 @@ async function editTask(id) {
   
   const newText = prompt("Edite a sua tarefa:", task.text);
   if (newText) {
-    const { error } = await supabase.from('tarefas').update({ text: newText.trim() }).eq('id', id);
+    const { error } = await supabaseClient.from('tarefas').update({ text: newText.trim() }).eq('id', id);
     if (!error) {
       task.text = newText.trim();
       render();
@@ -126,7 +128,7 @@ async function editTask(id) {
 
 async function deleteTask(id) {
   if (confirm("Excluir esta tarefa?")) {
-    const { error } = await supabase.from('tarefas').delete().eq('id', id);
+    const { error } = await supabaseClient.from('tarefas').delete().eq('id', id);
     if (!error) {
       tasks = tasks.filter(t => t.id !== id);
       render();
@@ -152,7 +154,7 @@ function closeModal() {
 async function saveDescription() {
   if (currentEditingId === null) return;
   const newDesc = document.getElementById("taskDesc").value;
-  const { error } = await supabase.from('tarefas').update({ descricao: newDesc }).eq('id', currentEditingId);
+  const { error } = await supabaseClient.from('tarefas').update({ descricao: newDesc }).eq('id', currentEditingId);
 
   if (!error) {
     const task = tasks.find(t => t.id === currentEditingId);

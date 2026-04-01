@@ -1,4 +1,3 @@
-
 //-------------------------- SUPABASE ------------------------------------
 
 const supabaseUrl = 'https://oobqohznlecgyahysyoq.supabase.co';
@@ -21,6 +20,7 @@ window.onload = async function() {
   }
 };
 
+// Função APENAS para entrar (Login)
 async function fazerLogin() {
   const email = document.getElementById("username").value.trim();
   const pass = document.getElementById("password").value;
@@ -33,17 +33,32 @@ async function fazerLogin() {
   let { data, error } = await supabaseClient.auth.signInWithPassword({ email, password: pass });
 
   if (error) {
-    const { data: signUpData, error: signUpError } = await supabaseClient.auth.signUp({ email, password: pass });
-    if (signUpError) {
-      alert("Erro: " + signUpError.message);
-      return;
-    }
-    data = signUpData;
-    alert("Conta criada com sucesso!");
+    alert("Erro ao entrar: E-mail ou senha incorretos.");
+    return; 
   }
 
   usuarioAtual = data.user;
   mostrarAplicativo();
+}
+
+// Função para criar conta (Cadastro)
+async function criarConta() {
+  const email = document.getElementById("username").value.trim();
+  const pass = document.getElementById("password").value;
+
+  if (!email || !pass) {
+    alert("Preencha e-mail e senha para criar a conta!");
+    return;
+  }
+
+  const { data, error } = await supabaseClient.auth.signUp({ email, password: pass });
+
+  if (error) {
+    alert("Erro ao criar conta: " + error.message);
+    return;
+  }
+
+  alert("Conta criada com sucesso! Agora clique em 'Entrar'.");
 }
 
 async function sair() {

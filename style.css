@@ -225,9 +225,74 @@ textarea { width: 100%; margin: 10px 0; padding: 10px; border-radius: 8px; borde
 }
 .save-modal-btn:hover { background-color: #1a0b8a; }
 
-/* ------------------- RESPONSIVIDADE (Fazer melhorias.... muitas melhorias) --- */
-@media (max-width: 900px) {
-  .app-layout { flex-direction: column; align-items: center; }
-  .sidebar { width: 100%; max-width: 400px; }
-  .lists-container { flex-direction: column; }
+/* ------------------- RESPONSIVIDADE  ------------------- */
+
+@media (max-width: 600px) { 
+  
+  
+  body {
+    padding: 10px;
+  }
+
+  .app-layout { 
+    flex-direction: column; 
+    align-items: center;
+    gap: 15px; 
+    max-width: 100%;
+  }
+
+  .sidebar { 
+    width: 100%; 
+    gap: 15px;
+    padding-top: 10px;
+  }
+
+  .sidebar-title {
+    font-size: 2rem;
+  }
+
+  .links-group {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .link-btn {
+    flex: 1 1 45%; 
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  .task-section {
+    width: 100%;
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  .task-title {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+
+  .add {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .add input, .add button {
+    width: 100%;
+  }
+
+  .lists-container { 
+    flex-direction: column; 
+    gap: 20px;
+  }
+
+  .modal-content {
+    padding: 15px;
+    width: 95%;
+  }
 }
